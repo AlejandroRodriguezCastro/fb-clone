@@ -2,11 +2,13 @@ import { Chat, EmojiFlags, ExpandMore, People, Storefront, VideoLibrary } from '
 import React from 'react'
 import './Sidebar.css'
 import SidebarRow from './SidebarRow'
+import { useStateValue } from './StateProvider';
 
 function Sidebar() {
+    const [{user}, dispatch] = useStateValue();   
     return (
         <div className="sidebar">
-            <SidebarRow src='https://1.bp.blogspot.com/-9FaNAsk5M6A/XtnAJWeepfI/AAAAAAABdIQ/br1b_0PV3mU_4RgDHlGC03bfrcbCHfrlQCK4BGAsYHg/s850/avatar-hola.jpg' title='Ale' />
+            <SidebarRow src={user.photoURL} title={user.displayName} />
             <SidebarRow Icon={EmojiFlags} title='Pages'/>
             <SidebarRow Icon={People} title='Friends'/>
             <SidebarRow Icon={Chat} title='Messenger' />
