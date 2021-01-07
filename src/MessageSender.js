@@ -3,6 +3,8 @@ import { InsertEmoticon, PhotoLibrary, Videocam } from '@material-ui/icons'
 import React, { useState } from 'react'
 import './MessageSender.css'
 import { useStateValue } from './StateProvider';
+import db from './firebase'
+import firebase from 'firebase'
 
 function MessageSender() {
     const [{user}, dispatch] = useStateValue();   
@@ -11,7 +13,14 @@ function MessageSender() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        // Espacio para DB
+       db.collection('posts').add({
+           message: input,
+           timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+           profilePic: user.photoURL,
+           username: user.displayName,
+           image: imageUrl,
+
+       })
 
         setInput('')
         setImageUrl('')
